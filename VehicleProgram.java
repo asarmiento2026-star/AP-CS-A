@@ -13,36 +13,36 @@ public class VehicleProgram {
     public static void main(String[] args) {
 
         //create and print object of sportscar
-        SportsCar ferrari = new SportsCar("Ferrari", 200, 2, 300, 15, 211, 660);
-        System.out.println(ferrari);
+        FlyingCar flyingcar = new FlyingCar("Flying Car", 200, 2, 300, 15, 5);
+        System.out.println(flyingcar);
 
         //create and print object of familysuv
-        FamilySUV toyota = new FamilySUV("Toyota", 120, 7, 800, 25, 5000);
-        System.out.println(toyota);
+        ElectricCar tesla = new ElectricCar("Tesla", 120, 7, 800, 25, 7200);
+        System.out.println(tesla);
 
         //create and print object of sailboat
-        SailBoat sail = new SailBoat("Beneteau", 40);
+        SailBoat sail = new SailBoat("Sail Boat", 2);
         System.out.println(sail);
 
         //create and print object of speedboat
-        MotorBoat speedBoat = new MotorBoat("Yamaha", 85, 1000, 300, 120);
-        System.out.println(speedBoat);
+        RowBoat rowBoat = new RowBoat("Row Boat", 15, 1000, 2);
+        System.out.println(rowBoat);
 
         //create and print object of passengerjet
-        PassengerJet boeing = new PassengerJet("Boeing", 180, 40000);
-        System.out.println(boeing);
+        SeaPlane seaPlane = new SeaPlane("Sea Plane", 2, 1000, 2);
+        System.out.println(seaPlane);
 
         //create and print object of fighterjet
-        FighterJet f16 = new FighterJet("Lockheed Martin", 1, 20000);
-        System.out.println(f16);
+        CargoPlane cargoPlane = new CargoPlane("Cargo Plane", 1, 20000, "Heavy Duty");
+        System.out.println(cargoPlane);
 
         //create and print object of sportmotorcycle
-        SportMotorcycle ninja = new SportMotorcycle("Kawasaki", 180, 998, 186);
-        System.out.println(ninja);
+        SportMotorcycle sportMotorcycle = new SportMotorcycle("Sports Bike", 180, 998, 24);
+        System.out.println(sportMotorcycle);
 
         //create and print object of cruisermotorcycle
-        CruiserMotorcycle harley = new CruiserMotorcycle("Harley-Davidson", 110, 1746);
-        System.out.println(harley);
+        DirtBike dirtBike = new DirtBike("Dirt Bike", 110, 1746, "Knobby");
+        System.out.println(dirtBike);
     }
 }
 
@@ -157,29 +157,18 @@ class Car extends Vehicle {
     }
 }
 
-//sportscar inherits form car
-class SportsCar extends Car {
+//flyingcar inherits form car
+class FlyingCar extends Car {
 
-    //create variable for max speed, horsepower
-    double topSpeed;
-    int horsepower;
+    //create variable for wings
+    int fins;
 
-    //constructor for sportscar
-    public SportsCar(String brand, double speed, int passengers, double cargo, double mpg, double topSpeed, int hp) {
+    //constructor for flyingcar
+    public FlyingCar(String brand, double speed, int passengers, double cargo, double mpg, int fins) {
         //call car constructor
         super(brand, speed, passengers, cargo, mpg);
-        //assign top speed
-        this.topSpeed = topSpeed;
-        //assign horsepower
-        this.horsepower = hp;
-    }
-    
-    //override getspeed method
-    @Override
-    public double getSpeed() {
-        
-        //return smaller value betweem current/topspeed
-        return Math.min(super.getSpeed(), topSpeed);
+        //assign fins
+        this.fins = fins;
     }
 
     //override tostring method
@@ -187,23 +176,22 @@ class SportsCar extends Car {
     public String toString() {
         //print tpye, horsepower, top speed
         return super.toString() +
-               "Type: Sports Car\n" +
-               "Horsepower: " + horsepower + "\n" +
-               "Top Speed: " + topSpeed + " mph\n";
+               "Type: Flying Car\n" +
+               "Fins: " + fins + "\n";
     }
 }
-//familysuv inherits from car
-class FamilySUV extends Car {
+//electriccar inherits from car
+class ElectricCar extends Car {
 
     //create variable for towing capacity
-    double towingCapacity;
+    int batteryPack;
 
-    //constructor for familysuv
-    public FamilySUV(String brand, double speed, int passengers, double cargo, double mpg, double towCap) {
+    //constructor for electriccar
+    public ElectricCar(String brand, double speed, int passengers, double cargo, double mpg, int batteryPack) {
         //call car constructor
         super(brand, speed, passengers, cargo, mpg);
-        //assign value to towing capacity
-        towingCapacity = towCap;
+        //assign value to batteryPack
+        this.batteryPack = batteryPack;
     }
 
     //override tostring method
@@ -211,8 +199,8 @@ class FamilySUV extends Car {
     public String toString() {
         //print type, towing capacity
         return super.toString() +
-               "Type: Family SUV\n" +
-               "Towing Capacity: " + towingCapacity + " lbs\n";
+               "Type: Electric Car\n" +
+               "Battery Cells: " + batteryPack + " batteries\n";
     }
 }
 
@@ -220,47 +208,38 @@ class FamilySUV extends Car {
 class SailBoat extends Vehicle {
 
     //create variable for max wind speed
-    double maxWindSpeed;
+    int sails;
 
     //sailboat constructor
-    public SailBoat(String brand, double windSpeed) {
+    public SailBoat(String brand, int sails) {
         //call vehicle constructor
-        super(brand, windSpeed, 6, 2000);
+        super(brand, sails, 6, 2000);
         //assign windspeed
-        maxWindSpeed = windSpeed;
+        this.sails = sails;
     }
 
     //override tostring method
     @Override
     public String toString() {
-        //print type
+        //print type, sails
         return super.toString() +
-               "Type: Sail Boat\n";
+               "Type: Sail Boat\n" +
+               "Sails: " + sails + "\n";
     }
 }
 
-//motorboat inherits from vehicle
-class MotorBoat extends Vehicle {
+//rowboat inherits from vehicle
+class RowBoat extends Vehicle {
 
     //create variable for horsepower, max speed
-    double horsepower;
-    double topSpeed;
+    int oars = 2;
 
-    //constructor for motorboat
-    public MotorBoat(String brand, double speed, double cargo, double hp, double topSpeed) {
+    //constructor for rowboat
+    public RowBoat(String brand, double speed, double cargo, int oars) {
         //call vehicle constructor
-        super(brand, speed, 8, cargo);
-        //assign horsepower
-        horsepower = hp;
-        //assign topspeed
-        this.topSpeed = topSpeed;
-    }
-
-    //override getspeed
-    @Override
-    public double getSpeed() {
-        //return smaller value between current and max speed
-        return Math.min(super.getSpeed(), topSpeed);
+        super(brand, speed, 2, 200.0);
+        //assign oars
+        this.oars = oars;
     }
 
     //override tostring method
@@ -268,29 +247,21 @@ class MotorBoat extends Vehicle {
     public String toString() {
         //print type, horsepower, topspeed
         return super.toString() +
-               "Type: Motor Boat\n" +
-               "Horsepower: " + horsepower + "\n" +
-               "Top Speed: " + topSpeed + " mph\n";
+               "Type: Row Boat\n" +
+               "Horsepower: " + oars + "\n";
     }
 }
 
-//passengerjet inherits from vehicle
-class PassengerJet extends Vehicle {
+//seaplane inherits from vehicle
+class SeaPlane extends Vehicle {
 
     //create variable for cruise speed
-    double cruiseSpeed = 550;
+    int pontoons = 2;
 
-    //constructor for passengerjet
-    public PassengerJet(String brand, int passengers, double cargo) {
+    //constructor for seaplane
+    public SeaPlane(String brand, int passengers, double cargo, int pontoons) {
         //call vehicle constructor
-        super(brand, 550, passengers, cargo);
-    }
-
-    //override getspeed method
-    @Override
-    public double getSpeed() {
-        //return cruise speed
-        return cruiseSpeed;
+        super(brand, 160, passengers, cargo);
     }
 
     //override tostring method
@@ -298,35 +269,30 @@ class PassengerJet extends Vehicle {
     public String toString() {
         //print type
         return super.toString() +
-               "Type: Passenger Jet\n";
+               "Type: Sea Plane\n" +
+               "Pontoons: " + pontoons + "\n";
     }
 }
 
-//fighterjet inherits from vehicle
-class FighterJet extends Vehicle {
+//cargoplane inherits from vehicle
+class CargoPlane extends Vehicle {
 
-    //create variable for max speed
-    double maxSpeed = 1500;
+    //create variable for landing gear
+    String landingGear = "Heavy Duty";
 
-    //fighterjet constructor
-    public FighterJet(String brand, int pilots, double cargo) {
+    //cargoplane constructor
+    public CargoPlane(String brand, int pilots, double cargo, String landingGear) {
         //call vehicle constructor
-        super(brand, 1500, pilots, cargo);
-    }
-
-    //override getspeed method
-    @Override
-    public double getSpeed() {
-        //return max speed
-        return maxSpeed;
+        super(brand, 600, pilots, cargo);
     }
 
     //override tostring method
     @Override
     public String toString() {
-        //print type
+        //print type and landing gear
         return super.toString() +
-               "Type: Fighter Jet\n";
+               "Type: Cargo Plane\n" +
+               "Landing Gear: " + landingGear + "\n";
     }
 }
 
@@ -335,23 +301,16 @@ class SportMotorcycle extends Vehicle {
 
     //create variable for enginecc and maximum speed
     int engineCC;
-    double topSpeed;
+    int fairings;
 
     //sportsmotorcycle constructor
-    public SportMotorcycle(String brand, double speed, int engineCC, double topSpeed) {
+    public SportMotorcycle(String brand, double speed, int engineCC, int fairings) {
         //call vehicle constructor
         super(brand, speed, 2, 100);
         //assign engine size
         this.engineCC = engineCC;
-        //assign top speed
-        this.topSpeed = topSpeed;
-    }
-
-    //override getspeed method
-    @Override
-    public double getSpeed() {
-        //dont exceed topspeed
-        return Math.min(super.getSpeed(), topSpeed);
+        //assign fairings
+        this.fairings = fairings;
     }
 
     //override tostring method
@@ -361,30 +320,35 @@ class SportMotorcycle extends Vehicle {
         return super.toString() +
                "Type: Sport Motorcycle\n" +
                "Engine (cc): " + engineCC + "\n" +
-               "Top Speed: " + topSpeed + " mph\n";
+               "Fairings: " + fairings + "\n";
     }
 }
 
-//cruisermotorcycle inherits from vehicle
-class CruiserMotorcycle extends Vehicle {
+//dirtbike inherits from vehicle
+class DirtBike extends Vehicle {
 
-    //create variable for engine size
+    //create variable for engine size, tire type
     int engineCC;
+    String tireType;
 
-    //constructor for cruisermotorcycle
-    public CruiserMotorcycle(String brand, double speed, int engineCC) {
+    //constructor for dirtbike
+    public DirtBike(String brand, double speed, int engineCC, String tireType) {
         //call vehicle constructor
         super(brand, speed, 2, 150);
         //assign engine size
         this.engineCC = engineCC;
+        this.tireType = tireType;
     }
 
+    public String getTireType() {return tireType;}
+    
     //override tostring method
     @Override
     public String toString() {
         //print type, enginesize
         return super.toString() +
-               "Type: Cruiser Motorcycle\n" +
-               "Engine (cc): " + engineCC + "\n";
+               "Type: Dirt Bike\n" +
+               "Engine (cc): " + engineCC + "\n" +
+               "Tire Type: " + tireType + "\n";
     }
 }
