@@ -63,19 +63,23 @@ class Sorting{
             list[index] = temp;
         }
     }
-    
+    //use selection sort to sort by telephone number
     public static void telephoneSort(Contact[] list)
     {
-        for(int index = 0; index <list.length; index++)
+        for(int index = 0; index <list.length -1; index++)
         {
             int min = index;
+            //scan for smaller phone number
             for (int scan = index + 1; scan < list.length; scan++)
             {
+                //updating minimum if scanned contact is smaller
                 if (list[scan].comparePhone(list[min]) < 0)
                 {
                     min = scan;
                 }
             }
+            
+            //value swap
             Contact temp = list[min];
             list[min] = list[index];
             list[index] = temp;
@@ -142,18 +146,24 @@ class Contact implements Comparable
         return result;
     }
     
+    //use phone number to determine ordering, then use name (alphabetical)
     public int comparePhone(Contact other)
     {
+        //compare phone numbers
         int result = phone.compareTo(other.getPhone());
+        //if they have the same number
         if (result == 0)
         {
+            //of last names are the same
             if(lastName.equals(other.getLastName()))
                 result = firstName.compareTo(other.getFirstName());
             else
+                //compare by last name
                 result = lastName.compareTo(other.getLastName());
         }
         return result;
     }
+    
     //-----------------------------------------------------------------
     // First name accessor.
     //-----------------------------------------------------------------
@@ -169,6 +179,7 @@ class Contact implements Comparable
         return lastName;
     }
     
+    //phone accessor
     public String getPhone()
     {
         return phone;
