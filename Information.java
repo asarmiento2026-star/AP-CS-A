@@ -48,10 +48,7 @@ public class Information {
         //use try to close file incase error occurs
         try (PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(fileName, true)))) {
             //move data to file
-            out.println("Name: " + name);
-            out.println("Email: " + email);
-            out.println("Graduation: " + gradYear);
-            out.println("Username: " + username);
+            out.println(name + ", " + email + ", " + gradYear + ", " + username);
             out.println("\n");
             System.out.println("\n[Success] Data written to " + fileName);
             
